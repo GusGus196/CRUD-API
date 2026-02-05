@@ -1,4 +1,6 @@
 import { Router, Request, Response} from "express";
+import { z } from "zod";
+
 import { pool } from '../db.js';
 
 
