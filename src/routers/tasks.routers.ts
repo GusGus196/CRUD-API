@@ -1,9 +1,6 @@
-import { Router, Request, Response} from "express";
+import { Router} from "express";
 import { getTasks, getTask, createTask, deleteTask, updateTask } from '../constrollers/tasks.controllers.js';
 import { z } from "zod";
-
-import { pool } from '../db.js';
-
 
 const router = Router();
 
