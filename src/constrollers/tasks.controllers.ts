@@ -23,14 +23,14 @@ export const createTask = async (req: Request, res: Response) => {
 
 export const deleteTask = async (req: Request, res: Response) => {
     const { id } = req.params;
-        const {rowCount} = await pool.query(`DELETE FROM TASKS WHERE ID = $1 RETURNING *`, [id]);
-        if ( rowCount === 0){
-            return res.sendStatus(404).json({ message: 'Task not found'});
-        }
+    const {rowCount} = await pool.query(`DELETE FROM TASKS WHERE ID = $1 RETURNING *`, [id]);
+    if ( rowCount === 0){
+        return res.sendStatus(404).json({ message: 'Task not found'});
+    }
     return res.sendStatus(204).json({message: 'Task deleted'});
 };
 
-export const updateTask = async (req: Request, res: Response) => {
+export const updateTask = async (req: Request, res: Response) => { // ! Falta actualizar inyeccion de SQL
     const { id } = req.params;
         const data = req.body;
     
