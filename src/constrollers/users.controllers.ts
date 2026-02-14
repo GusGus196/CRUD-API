@@ -31,7 +31,7 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const register = async (req: Request, res: Response) => { 
     try{
-        const parsed = registerSchema.safeParse(req.body);
+        const parsed = registerSchema.safeParse(req.body); //  Validation
 
         if (!parsed.success) {
             return res.status(400).json({
@@ -49,7 +49,7 @@ export const register = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "User already exists"});
         }
 
-        const passwordHash = await bcrypt.hash(password_hashed, 10);
+        const passwordHash = await bcrypt.hash(password_hashed, 10); // Hashing the password
 
         const { rows } = await pool.query(`INSERT INTO "Usuarios" (email, first_name, last_name, password_hashed) VALUES ($1, $2, $3, $4) RETURNING *`, [email, first_name, last_name, passwordHash]);
         return res.status(201).json({
@@ -73,6 +73,10 @@ export const deleteUser = async (req: Request, res: Response) => { // ! Validar 
     return res.sendStatus(204).json({message: 'User deleted'});
 };
 
-export const updateUser = async (req: Request, res: Response) => { // ! Falta implementar
+export const updateUser = async (req: Request, res: Response) => { // ! Falta implementar PUT o PUSH
 
 };
+
+export const userLogin = async (req: Request, res: Response) => { // ! Falta implementar login
+    const { email, password } = req.body;
+}
